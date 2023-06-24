@@ -70,14 +70,6 @@ public class NavigatorWebTablesPage extends AbstractPageObject {
     public void scrollToEditElement() {
         scroll(editElement);
     }
-    public void pause() {
-        try {
-            Thread.sleep(10000);
-        } catch (Exception exception) {
-            System.out.println("Something went wrong.");
-        }
-    }
-
 
 }
 
