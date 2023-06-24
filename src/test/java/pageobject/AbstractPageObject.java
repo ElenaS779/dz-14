@@ -1,6 +1,7 @@
 package pageobject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -11,13 +12,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class AbstractPageObject {
     private final static int DURATION_TO_WAIT_DEFAULT = 4;
     protected WebDriver driver;
 
-    public AbstractPageObject(WebDriver driver) {
+    public AbstractPageObject(WebDriver driver, String url){
         this.driver = driver;
+        driver.get(url);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     public WebElement getElement(By by, int waitForSeconds){
@@ -59,12 +63,19 @@ public class AbstractPageObject {
         new WebDriverWait(driver, Duration.ofSeconds(DURATION_TO_WAIT_DEFAULT))
                 .until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
-// public void checkFirstName(By by){
-//
-//         Actions actions = new Actions(driver);
-//         String fistName = getElement(by).getCssValue(COLOUR_ATTRIBUTE_NAME);
-//         actions.moveToElement(getElements(by).get(index)).perform();
-//         String colorWithMouse = getElement(by).getCssValue(COLOUR_ATTRIBUTE_NAME);
-//
-//    }
+    protected void scroll(String elementId) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(String.format("function Position(obj){\n" +
+                " var currenttop = 0;\n" +
+                " if (obj.offsetParent){\n" +
+                "  do {\n" +
+                "   currenttop += obj.offsetTop;\n" +
+                " }while ((obj = obj.offsetParent));\n" +
+                "  return [currenttop];\n" +
+                " }\n" +
+                "}\n" +
+                "window.scrollTo(0, Position(document.getElementById(\"%s\")))", elementId), "");
+
+    }
+
 }

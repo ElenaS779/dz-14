@@ -3,7 +3,8 @@
 
     <test name="Regression testing">
         <classes>
-            <class name="tests.NavigateByButtonsTest"/>
+            <class name="tests.ElementsPageTests"/>
+            <class name="tests.WebTablesPageTests"/>
         </classes>
     </test>
 </suite>
