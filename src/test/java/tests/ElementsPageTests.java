@@ -23,7 +23,7 @@ public class ElementsPageTests extends BaseTest{
         elementsPage.scrollToButtons();
         elementsPage.clickButtons();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/buttons"
-                , "The logIn was not successful");
+                , "Received a wrong url than expected.");
     }
     @Test
     @Description("The test checks how works 'Click Me' button")
