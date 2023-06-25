@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Automation tests">
+
+    <test name="Regression testing">
+        <classes>
+            <class name="tests.ElementsPageTests"/>
+            <class name="tests.WebTablesPageTests"/>
+        </classes>
+    </test>
+</suite>
